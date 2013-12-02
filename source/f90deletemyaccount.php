@@ -40,7 +40,9 @@ class plgSystemF90deletemyaccount extends JPlugin
 		$contents = ob_get_contents();
 		ob_end_clean();
 		
-      	JResponse::appendBody($contents);
+		$body = JResponse::getBody();
+		$body = str_ireplace('</body>', $contents.'</body>', $body);
+		JResponse::setBody($body);
 		return true;
 	}
 	
