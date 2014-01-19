@@ -25,6 +25,7 @@
 			<fieldset name="basic">
 				<field name="action"
 						type="radio"
+						class="btn-group"
 						label="PLG_SYSTEM_F90DELETEMYACCOUNT_ACTION_LABEL"
 						description="PLG_SYSTEM_F90DELETEMYACCOUNT_ACTION_DESC">
 						<option value="0">PLG_SYSTEM_F90DELETEMYACCOUNT_ACTION_BLOCK</option>
@@ -33,6 +34,7 @@
 				
 				<field name="load_jquery"
 						type="radio"
+						class="btn-group"
 						label="PLG_SYSTEM_F90DELETEMYACCOUNT_LOAD_JQUERY_LABEL"
 						description="PLG_SYSTEM_F90DELETEMYACCOUNT_LOAD_JQUERY_DESC"
 						default="0">
