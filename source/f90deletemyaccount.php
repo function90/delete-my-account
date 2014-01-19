@@ -23,7 +23,19 @@ class plgSystemF90deletemyaccount extends JPlugin
 			return true;
 		}
 		$doc = JFactory::getDocument();
-		$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma.js');      
+		
+		$version = new JVersion();
+		$major  = str_replace('.', '', $version->RELEASE);
+		
+		if($major == '25'){
+			if($this->params->get('load_jquery', false)){
+				$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
+			}
+			
+			$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma25.js');
+		}else{
+			$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma.js');
+		}     
 		
 		return true;
 	}
@@ -33,6 +45,13 @@ class plgSystemF90deletemyaccount extends JPlugin
 		$app = JFactory::getApplication();
 		if($app->isAdmin()){
 			return true;
+		}
+		
+		$version = new JVersion();
+		$major  = str_replace('.', '', $version->RELEASE);
+		
+		if($major == '25'){
+			return true;	
 		}
 		
 		ob_start();
@@ -72,6 +91,8 @@ class plgSystemF90deletemyaccount extends JPlugin
 		if($this->params->get('action', 0)){
 			// delete users account	
 			if($user->delete()){
+				$session = JFactory::getSession();
+				$session->set('user', null);
 				$this->_sendEmail();
 				echo json_encode(array('error' => false, 'html' => $html));
 			}
