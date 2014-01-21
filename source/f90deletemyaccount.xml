@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>dev.fucntion90@gmail.com</authorEmail>
 	<authorUrl>www.function90.com</authorUrl>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<description>PLG_CONTENT_F90DELETEMYACCOUNT_XML_DESCRIPTION</description>
 
 	<files>
@@ -38,6 +38,16 @@
 						label="PLG_SYSTEM_F90DELETEMYACCOUNT_LOAD_JQUERY_LABEL"
 						description="PLG_SYSTEM_F90DELETEMYACCOUNT_LOAD_JQUERY_DESC"
 						default="0">
+						<option value="1">JYES</option>
+						<option value="0">JNO</option>
+				</field>
+
+				<field name="using_bootstrap"
+						type="radio"
+						class="btn-group"
+						label="PLG_SYSTEM_F90DELETEMYACCOUNT_USING_BOOTSTRAP_LABEL"
+						description="PLG_SYSTEM_F90DELETEMYACCOUNT_USING_BOOTSTRAP_DESC"
+						default="1">
 						<option value="1">JYES</option>
 						<option value="0">JNO</option>
 				</field>

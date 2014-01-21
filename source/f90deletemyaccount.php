@@ -27,11 +27,11 @@ class plgSystemF90deletemyaccount extends JPlugin
 		$version = new JVersion();
 		$major  = str_replace('.', '', $version->RELEASE);
 		
-		if($major == '25'){
-			if($this->params->get('load_jquery', false)){
-				$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
-			}
-			
+		if($this->params->get('load_jquery', false)){
+			$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
+		}
+		
+		if($major == '25' || $this->params->get('using_bootstrap', true) == false){ 
 			$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma25.js');
 		}else{
 			$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma.js');
@@ -50,7 +50,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		$version = new JVersion();
 		$major  = str_replace('.', '', $version->RELEASE);
 		
-		if($major == '25'){
+		if($major == '25' || $this->params->get('using_bootstrap', true) == false){
 			return true;	
 		}
 		
