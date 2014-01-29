@@ -16,6 +16,13 @@ if($app->isAdmin()){
 class plgSystemF90deletemyaccount extends JPlugin
 {
 	protected $autoloadLanguage = true;
+
+	public function __construct($subject, $config = array())
+	{
+		parent::__construct($subject, $config);
+		$this->loadLanguage();
+	}
+	
 	public function onBeforeRender()
 	{
 		$app = JFactory::getApplication();
