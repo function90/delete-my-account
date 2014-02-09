@@ -16,7 +16,6 @@ if($app->isAdmin()){
 class plgSystemF90deletemyaccount extends JPlugin
 {
 	protected $autoloadLanguage = true;
-
 	public function __construct($subject, $config = array())
 	{
 		parent::__construct($subject, $config);
@@ -100,7 +99,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 			if($user->delete()){
 				$session = JFactory::getSession();
 				$session->set('user', null);
-				$this->_sendEmail();
+				$this->_sendEmail($user->name);
 				echo json_encode(array('error' => false, 'html' => $html));
 			}
 			else{
@@ -112,7 +111,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		//else block user account
 		$user->set('block', 1);
 		if($user->save()){
-			$this->_sendEmail();
+			$this->_sendEmail($user->name);
 			echo json_encode(array('error' => false, 'html' => $html));
 		}
 		else{
@@ -121,17 +120,16 @@ class plgSystemF90deletemyaccount extends JPlugin
 		exit();		
 	}
 	
-	public function _sendEmail()
+	public function _sendEmail($username)
 	{
 		$config = JFactory::getConfig();
 		$data['fromname'] = $config->get('fromname');
 		$data['mailfrom'] = $config->get('mailfrom');
 		
-		$user = JFactory::getUser();
 		$emailSubject = JText::_('PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_SUBJECT');
 		$emailBodyAdmin = JText::sprintf(
 				'PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_BODY',
-				$user->name
+				$username
 			);
 
 		$db = JFactory::getDbo();
