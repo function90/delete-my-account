@@ -4,7 +4,7 @@ var dma = {};
 	
 	$(document).ready(function(){
 			$('.f90-delete-my-account').click(function(){
-					if(confirm("Are you sure you want to delete your account? \n After deleting account you won't be able to recover it.")){
+					if(confirm(Joomla.JText._('PLG_SYSTEM_F90DELETEMYACCOUNT_ARE_YOU_SURE_MSG'))){
 						dma.delete_request();
 					}
 					return false;
@@ -20,7 +20,7 @@ var dma = {};
 				$('body').append(data.html);
 				
 				if(data.error == false){
-					alert('Your account has been deleted successfully.');					
+					alert(Joomla.JText._('PLG_SYSTEM_F90DELETEMYACCOUNT_SUCCESS'));					
 					$("#f90dma-login-form").submit();
 				}
 				else{

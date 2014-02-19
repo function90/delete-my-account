@@ -20,6 +20,8 @@ class plgSystemF90deletemyaccount extends JPlugin
 	{
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
+		JText::script('PLG_SYSTEM_F90DELETEMYACCOUNT_ARE_YOU_SURE_MSG');
+		JText::script('PLG_SYSTEM_F90DELETEMYACCOUNT_SUCCESS');
 	}
 	
 	public function onBeforeRender()
