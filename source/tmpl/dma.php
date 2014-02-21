@@ -8,7 +8,9 @@
 **/
 defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
-<div id="f90-delete-my-account-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="f90-delete-my-account-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+    <div class="modal-content">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		<h3 id="myModalLabel"><?php echo JText::_('PLG_SYSTEM_F90DELETEMYACCOUNT_ARE_YOU_SURE');?></h3>
@@ -23,5 +25,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<button id="dma-send-request" class="btn btn-primary" data-loading-text="Sending request..." onclick="dma.delete_request(); return false;"><?php echo JText::_('PLG_SYSTEM_F90DELETEMYACCOUNT_BUTTON');?></button>
 		
 	</div>
+	</div>
+	</div>
 </div>
+<?php 
+
 <?php 
