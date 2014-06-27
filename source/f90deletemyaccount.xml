@@ -51,6 +51,21 @@
 						<option value="1">JYES</option>
 						<option value="0">JNO</option>
 				</field>
+				
+				<field name="system_email"
+						type="radio"
+						class="btn-group"
+						label="PLG_SYSTEM_F90DELETEMYACCOUNT_SYSTEM_EMAIL_LABEL"
+						description="PLG_SYSTEM_F90DELETEMYACCOUNT_SYSTEM_EMAIL_DESC"
+						default="1">
+						<option value="1">JYES</option>
+						<option value="0">JNO</option>
+				</field>
+				
+				<field name="email"
+						type="textarea"
+						label="PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_LABEL"
+						description="PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_DESC" />
 			</fieldset>
 		</fields>
 	</config>

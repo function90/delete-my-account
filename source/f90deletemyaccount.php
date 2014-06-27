@@ -8,11 +8,6 @@
 **/
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$app = JFactory::getApplication();
-if($app->isAdmin()){
-	return true;
-}
-
 class plgSystemF90deletemyaccount extends JPlugin
 {
 	protected $autoloadLanguage = true;
@@ -30,6 +25,12 @@ class plgSystemF90deletemyaccount extends JPlugin
 		if($app->isAdmin()){
 			return true;
 		}
+		
+		$user = JFactory::getUser();
+		if(!$user->id){
+			return true;
+		}
+		
 		$doc = JFactory::getDocument();
 		
 		$version = new JVersion();
@@ -55,6 +56,11 @@ class plgSystemF90deletemyaccount extends JPlugin
 			return true;
 		}
 		
+		$user = JFactory::getUser();
+		if(!$user->id){
+			return true;
+		}
+
 		$version = new JVersion();
 		$major  = str_replace('.', '', $version->RELEASE);
 		
@@ -77,6 +83,11 @@ class plgSystemF90deletemyaccount extends JPlugin
 	{
 		$app = JFactory::getApplication();
 		if($app->isAdmin()){
+			return true;
+		}
+		
+		$user = JFactory::getUser();
+		if(!$user->id){
 			return true;
 		}
 		
@@ -134,19 +145,41 @@ class plgSystemF90deletemyaccount extends JPlugin
 				$username
 			);
 
-		$db = JFactory::getDbo();
-		// Get all admin users
-		$query = $db->getQuery(true);
-		$query->select($db->quoteName(array('name', 'email', 'sendEmail')))
-			->from($db->quoteName('#__users'))
-			->where($db->quoteName('sendEmail') . ' = ' . 1);
-
-		$db->setQuery($query);
-		$rows = $db->loadObjectList();
+		$recipient = $this->params->get('email', '');
+		$recipient = explode(',', $recipient);
 		
-		// Send mail to all superadministrators id
-		foreach ($rows as $row){
-			$return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBodyAdmin);
+		if($this->params->get('system_email', true)){
+			$db = JFactory::getDbo();
+			// Get all admin users
+			$query = $db->getQuery(true);
+			$query->select($db->quoteName(array('name', 'email', 'sendEmail')))
+				->from($db->quoteName('#__users'))
+				->where($db->quoteName('sendEmail') . ' = ' . 1);
+	
+			$db->setQuery($query);
+			$rows = $db->loadObjectList();
+			
+			// Send mail to all superadministrators id
+			foreach ($rows as $row){
+				$recipient[] = $row->email;
+			}
 		}
+		
+		$mail = JFactory::getMailer()
+							->setSender(
+										array(
+												$data['mailfrom'],
+												$data['fromname']
+											)
+										)
+							->addRecipient($recipient)
+							->setSubject($emailSubject)
+							->setBody($emailBodyAdmin);
+							
+		if (!$mail->Send()) {
+			
+		}
+		
+		return true;
 	}
 }
