@@ -14,6 +14,16 @@ class plgSystemF90deletemyaccount extends JPlugin
 	public function __construct($subject, $config = array())
 	{
 		parent::__construct($subject, $config);
+		$app = JFactory::getApplication();
+		if($app->isAdmin()){
+			return true;
+		}
+		
+		$user = JFactory::getUser();
+		if(!$user->id || ($app->get('offline') && !$user->authorise('core.login.offline'))){
+			return true;
+		}
+
 		$this->loadLanguage();
 		JText::script('PLG_SYSTEM_F90DELETEMYACCOUNT_ARE_YOU_SURE_MSG');
 		JText::script('PLG_SYSTEM_F90DELETEMYACCOUNT_SUCCESS');
@@ -27,7 +37,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		}
 		
 		$user = JFactory::getUser();
-		if(!$user->id){
+		if(!$user->id || ($app->get('offline') && !$user->authorise('core.login.offline'))){
 			return true;
 		}
 		
@@ -57,7 +67,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		}
 		
 		$user = JFactory::getUser();
-		if(!$user->id){
+		if(!$user->id || ($app->get('offline') && !$user->authorise('core.login.offline'))){
 			return true;
 		}
 
@@ -87,7 +97,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		}
 		
 		$user = JFactory::getUser();
-		if(!$user->id){
+		if(!$user->id || ($app->get('offline') && !$user->authorise('core.login.offline'))){
 			return true;
 		}
 		
