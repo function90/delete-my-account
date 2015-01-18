@@ -13,7 +13,7 @@ var dma = {};
 	
 	dma.delete_request = function(){
 		$.ajax({
-			url: "index.php?option=com_f90dma&task=sendDeleteRequest"
+			url: f90_dma_base+"index.php?option=com_f90dma&task=sendDeleteRequest"
 			}).done(function(data) {
 				data = $.parseJSON(data);
 				

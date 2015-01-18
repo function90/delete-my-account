@@ -45,11 +45,11 @@ class plgSystemF90deletemyaccount extends JPlugin
 		
 		$version = new JVersion();
 		$major  = str_replace('.', '', $version->RELEASE);
-		
+		JHtml::_('behavior.framework');
 		if($this->params->get('load_jquery', false)){
 			$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
 		}
-		
+		$doc->addScriptDeclaration('var f90_dma_base = "'.JUri::root().'";');
 		if($major == '25' || $this->params->get('using_bootstrap', true) == false){ 
 			$doc->addScript('plugins/'.$this->_type.'/'.$this->_name.'/js/dma25.js');
 		}else{
