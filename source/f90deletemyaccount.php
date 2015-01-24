@@ -122,7 +122,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 			if($user->delete()){
 				$session = JFactory::getSession();
 				$session->set('user', null);
-				$this->_sendEmail($user->name);
+				$this->_sendEmail($user);
 				echo json_encode(array('error' => false, 'html' => $html));
 			}
 			else{
@@ -134,7 +134,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		//else block user account
 		$user->set('block', 1);
 		if($user->save()){
-			$this->_sendEmail($user->name);
+			$this->_sendEmail($user);
 			echo json_encode(array('error' => false, 'html' => $html));
 		}
 		else{
@@ -143,7 +143,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		exit();		
 	}
 	
-	public function _sendEmail($username)
+	public function _sendEmail($user)
 	{
 		$config = JFactory::getConfig();
 		$data['fromname'] = $config->get('fromname');
@@ -152,7 +152,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		$emailSubject = JText::_('PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_SUBJECT');
 		$emailBodyAdmin = JText::sprintf(
 				'PLG_SYSTEM_F90DELETEMYACCOUNT_EMAIL_BODY',
-				$username
+				$user->name, $user->id
 			);
 
 		$recipient = $this->params->get('email', '');
