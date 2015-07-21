@@ -21,7 +21,7 @@ var dma = {};
 				
 				if(data.error == false){
 					alert(Joomla.JText._('PLG_SYSTEM_F90DELETEMYACCOUNT_SUCCESS'));					
-					$("#f90dma-login-form").submit();
+					location.reload();
 				}
 				else{
 					alert(data.html);

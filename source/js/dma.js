@@ -21,7 +21,7 @@ var dma = {};
 				$('#f90-delete-my-account-modal .modal-footer').html('');
 				
 				if(data.error == false){					
-					setTimeout(function(){$("#f90dma-login-form").submit();}, 3000);
+					setTimeout(function(){location.reload();}, 3000);
 				}
 			}).fail(function() {
 				$('#f90-delete-my-account-modal .modal-body').html('<p>There is some error in sending request to admin. Please contact them by using any other means.');

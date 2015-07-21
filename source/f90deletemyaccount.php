@@ -119,7 +119,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		
 		if($this->params->get('action', 0)){
 			// delete users account	
-			if($user->delete()){
+			if($app->logout() && $user->delete()){
 				$session = JFactory::getSession();
 				$session->set('user', null);
 				$this->_sendEmail($user);
@@ -133,7 +133,7 @@ class plgSystemF90deletemyaccount extends JPlugin
 		
 		//else block user account
 		$user->set('block', 1);
-		if($user->save()){
+		if($user->save() && $app->logout()){
 			$this->_sendEmail($user);
 			echo json_encode(array('error' => false, 'html' => $html));
 		}
