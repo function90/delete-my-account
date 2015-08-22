@@ -20,7 +20,8 @@ class plgSystemF90deletemyaccount extends JPlugin
 		}
 		
 		$user = JFactory::getUser();
-		if(!$user->id || ($app->get('offline') && !$user->authorise('core.login.offline'))){
+		$config = JFactory::getConfig();
+		if(!$user->id || ($config->get('offline') && !$user->authorise('core.login.offline'))){
 			return true;
 		}
 
