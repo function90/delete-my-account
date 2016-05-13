@@ -3,7 +3,7 @@ var dma = {};
 (function($){
 	
 	$(document).ready(function(){
-			$('.f90-delete-my-account').live('click', function(){
+			$('.f90-delete-my-account').click(function(){
 														$('#f90-delete-my-account-modal').modal('show');
 														$('#dma-send-request').show();
 														return false;
