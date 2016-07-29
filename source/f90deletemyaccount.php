@@ -176,6 +176,10 @@ class plgSystemF90deletemyaccount extends JPlugin
 			}
 		}
 		
+		if(empty($recipient)){
+			return true;
+		}
+		
 		$mail = JFactory::getMailer()
 							->setSender(
 										array(
